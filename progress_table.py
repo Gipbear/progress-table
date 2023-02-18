@@ -80,6 +80,13 @@ if __name__ == '__main__':
     A = range(3)
     B = range(2)
     C = {f'c_{i}':'0' for i in range(50)}
+
+    # case1
+    for b in enumerate(PT(B, 0, desc='b in enumerate')):
+        for c in PT(C.items(), 1, desc=lambda x: x[0]):
+            time.sleep(0.001)
+
+    # case2（loop c is a bad case）
     for a in PT(obj=A, col=0, desc='A'):
         for b in enumerate(PT(B, 1, desc='b in enumerate', switch=False)):
             # desc should not too long
@@ -88,6 +95,3 @@ if __name__ == '__main__':
             # Best, the sibling cycles have the same length of desc
             for p in PT(C.items(), 2):
                     time.sleep(0.001)
-    for b in enumerate(PT(B, 0, desc='b in enumerate')):
-        for c in PT(C.items(), 1, desc=lambda x: x[0]):
-            time.sleep(0.001)
